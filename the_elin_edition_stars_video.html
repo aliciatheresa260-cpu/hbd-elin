@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Elin Edition — Birthday Special</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#0b1329; --ink:#f3f4f6; --red:#ff5c8a; --blue:#38bdf8;
+  --orange:#fb923c; --muted:#94a3b8; --line:rgba(255,255,255,.12);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"DM Sans",sans-serif;overflow-x:hidden}
+button{font:inherit;cursor:pointer}
+.site-shell{max-width:1440px;margin:auto;min-height:100vh;position:relative}
+.topbar{height:54px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 clamp(20px,5vw,72px);font:11px "DM Mono",monospace;letter-spacing:.08em;text-transform:uppercase;background:rgba(11, 19, 41, 0.8);backdrop-filter:blur(8px)}
+.topbar .issue{color:var(--red)}
+.topbar .top-right{display:flex;gap:24px}
+.cover{min-height:calc(100vh
+54px);padding:clamp(28px,6vw,80px) clamp(20px,7vw,100px) 50px;display:grid;grid-template-columns:1.1fr .9fr;gap:5vw;align-items:center;position:relative;overflow:hidden}
+.cover:after{content:"";position:absolute;width:340px;height:340px;border:1px solid rgba(255,92,138,.3);border-radius:50%;right:-180px;top:12%;box-shadow:0 0 0 35px rgba(255,92,138,.05),0 0 0 70px rgba(56,189,248,.03);pointer-events:none}
+.cover-copy{position:relative;z-index:1}
+.eyebrow,.section-kicker{font:11px "DM Mono",monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--red)}
+.cover h1{font:600 clamp(4.2rem,10vw,10rem)/.83 "Playfair Display",serif;letter-spacing:-.075em;margin:25px 0 24px;max-width:780px;color:#f8fafc}
+.cover h1 em{color:var(--red);font-weight:500}
+.cover-sub{max-width:390px;font-size:14px;line-height:1.8;color:#cbd5e1}
+.cover-meta{display:flex;align-items:center;gap:15px;margin-top:38px}
+.enter-btn{border:0;background:var(--red);color:#fff;padding:15px 22px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;display:flex;gap:24px;align-items:center;transition:.25s;box-shadow:0 0 20px rgba(255,92,138,.4)}
+.enter-btn:hover{background:var(--blue);color:#0b1329;transform:translateY(-3px)}
+.cover-meta small{font:10px "DM Mono",monospace;color:var(--muted);line-height:1.6}
+.cover-art{height:min(68vh,650px);min-height:420px;position:relative;display:flex;align-items:center;justify-content:center}
+.photo-frame{position:absolute;width:74%;height:82%;background:#1e293b;padding:12px 12px 48px;transform:rotate(5deg);box-shadow:18px 22px 40px rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.1)}
+.photo-frame img{width:100%;height:100%;object-fit:cover;filter:saturate(.85) contrast(1.05)}
+.photo-label{position:absolute;bottom:14px;left:18px;font:italic 19px "Playfair Display",serif;color:#e2e8f0}
+.sticker{position:absolute;background:var(--blue);color:#0b1329;width:118px;height:118px;border-radius:50%;display:grid;place-items:center;text-align:center;font:italic 17px/1.1 "Playfair Display",serif;right:1%;top:12%;transform:rotate(12deg);z-index:2;box-shadow:0 8px 25px rgba(56,189,248,.4);font-weight:bold}
+.cover-index{position:absolute;bottom:35px;right:clamp(20px,7vw,100px);font:10px "DM Mono",monospace;color:var(--muted);writing-mode:vertical-rl}
+.marquee{background:linear-gradient(90deg, #1e1b4b, var(--red), #1e1b4b);color:#fff;overflow:hidden;white-space:nowrap;padding:12px 0;font:11px "DM Mono",monospace;letter-spacing:.18em;text-transform:uppercase;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.marquee span{display:inline-block;animation:marquee 25s linear infinite}
+@keyframes marquee{to{transform:translateX(-50%)}}
+.page{display:none;min-height:calc(100vh
+54px);padding:clamp(38px,7vw,90px) clamp(20px,8vw,115px) 100px;position:relative}
+.page.active{display:block;animation:reveal .55s ease both}
+@keyframes reveal{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.page-heading{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:1px solid var(--line);padding-bottom:18px;margin-bottom:45px}
+.page-heading h2{font:500 clamp(2.8rem,7vw,6.4rem)/.95 "Playfair Display",serif;letter-spacing:-.055em;margin:12px 0 0;color:#f8fafc}
+.page-number{font:11px "DM Mono",monospace;color:var(--red)}
+.message-layout{display:grid;grid-template-columns:.7fr 1.3fr;gap:9vw;align-items:start}
+.side-note{font:italic 22px/1.3 "Playfair Display",serif;color:var(--red);max-width:190px;transform:rotate(-4deg);margin:30px 0}
+.side-note:before{content:"✳";display:block;font:30px "DM Sans";margin-bottom:20px}
+.letter{max-width:700px}
+.letter .dropcap{font:600 92px/.8 "Playfair Display",serif;color:var(--red);float:left;margin:9px 14px 0 0}
+.letter p{font:500 clamp(1.05rem,2vw,1.35rem)/1.8 "Playfair Display",serif;margin:0 0 24px;color:#e2e8f0}
+.letter .signoff{font:italic 25px "Playfair Display",serif;color:var(--red);margin-top:35px}
+.pullquote{margin:55px 0 0;padding:25px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font:italic clamp(1.8rem,4vw,3.3rem)/1.15 "Playfair Display",serif;max-width:820px;color:#f8fafc}
+.pullquote span{color:var(--blue)}
+.gallery-intro{display:flex;justify-content:space-between;gap:20px;align-items:end;margin-bottom:28px}
+.gallery-intro p{max-width:280px;color:var(--muted);font-size:13px;line-height:1.7;margin:0}
+.gallery-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:28px;align-items:center}
+.gallery-main{position:relative;background:#1e293b;padding:12px 12px 52px;transform:rotate(-1.5deg);box-shadow:12px 15px 30px rgba(0,0,0,.4);transition:.35s;border:1px solid rgba(255,255,255,.1)}
+.gallery-main img{width:100%;height:430px;object-fit:cover;display:block;filter:saturate(.85)}
+.gallery-main figcaption{position:absolute;bottom:14px;left:18px;font:italic 21px "Playfair Display",serif;color:#e2e8f0}
+.gallery-side{display:flex;flex-direction:column;gap:22px}
+.gallery-side .mini-photo{background:#1e293b;padding:9px 9px 38px;transform:rotate(2.5deg);max-width:310px;align-self:center;box-shadow:8px 10px 20px rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.1)}
+.mini-photo img{width:100%;height:190px;object-fit:cover;display:block}
+.mini-photo figcaption{font:italic 17px "Playfair Display",serif;padding:8px 3px 0;color:#e2e8f0}
+.gallery-controls{display:flex;align-items:center;gap:12px}
+.round-btn{width:42px;height:42px;border:1px solid var(--ink);background:transparent;border-radius:50%;font-size:18px;transition:.2s}
+.round-btn:hover{background:var(--ink);color:#0b1329}
+.gallery-count{font:11px "DM Mono",monospace;color:var(--muted)}
+.surprise-layout{display:grid;grid-template-columns:1fr 1fr;gap:8vw;align-items:center;min-height:420px}
+.gift-graphic{height:390px;background:linear-gradient(135deg, #1e1b4b, #2446a8);color:var(--paper);position:relative;display:grid;place-items:center;overflow:hidden;border:1px solid rgba(255,255,255,.15);box-shadow:0 20px 40px rgba(0,0,0,.4)}
+.gift-graphic:before,.gift-graphic:after{content:"";position:absolute;border:1px solid rgba(255,255,255,.2);border-radius:50%;width:280px;height:280px}
+.gift-graphic:after{width:360px;height:360px}
+.gift-star{font:150px/1 "Playfair Display",serif;position:relative;z-index:1;transition:transform .6s;color:#38bdf8;text-shadow:0 0 20px rgba(56,189,248,.6)}
+.gift-graphic.open .gift-star{transform:rotate(45deg) scale(1.15)}
+.gift-caption{position:absolute;bottom:18px;left:20px;font:10px "DM Mono",monospace;letter-spacing:.15em;text-transform:uppercase;color:#93c5fd}
+.surprise-copy h3{font:500 clamp(2.5rem,5vw,4.8rem)/.98 "Playfair Display",serif;letter-spacing:-.05em;margin:15px 0 20px;color:#f8fafc}
+.surprise-copy p{color:#cbd5e1;font-size:14px;line-height:1.8;max-width:390px}
+.praise-box{border-left:3px solid var(--orange);padding:14px 18px;margin:25px 0;font:italic 22px/1.4 "Playfair Display",serif;min-height:95px;background:rgba(30, 41, 59, 0.5);color:#f1f5f9;border-radius:0 8px 8px 0}
+.reveal-btn{background:var(--orange);border:0;color:#0b1329;font-weight:bold;padding:14px 19px;text-transform:uppercase;font:11px "DM Mono",monospace;letter-spacing:.1em;transition:.2s;box-shadow:0 0 15px rgba(251,146,60,.4)}
+.reveal-btn:hover{background:var(--red);color:#fff;transform:translateY(-2px)}
+.bottom-nav{position:fixed;z-index:20;bottom:0;left:0;right:0;background:rgba(11, 19, 41,.94);backdrop-filter:blur(12px);border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;padding:13px clamp(20px,7vw,100px)}
+.nav-label{font:10px "DM Mono",monospace;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+.nav-actions{display:flex;gap:10px}
+.nav-btn{border:1px solid var(--line);background:rgba(255,255,255,.05);color:#f8fafc;padding:10px 15px;font:10px "DM Mono",monospace;text-transform:uppercase;letter-spacing:.08em;transition:.2s}
+.nav-btn:hover{background:rgba(255,255,255,.15)}
+.nav-btn.primary{background:var(--red);color:#fff;border-color:var(--red)}
+.nav-btn:disabled{opacity:.25;cursor:not-allowed}
+.progress{display:flex;gap:5px;align-items:center}
+.progress i{display:block;width:22px;height:3px;background:#334155}
+.progress i.on{background:var(--red);box-shadow:0 0 8px var(--red)}
+.footer-mark{font:10px "DM Mono",monospace;color:var(--muted);text-align:center;margin-top:70px;letter-spacing:.1em}
+@media(max-width:760px){
+ .topbar{padding:0 18px}.topbar .top-right{gap:10px}
+ .cover{grid-template-columns:1fr;gap:15px;padding:55px 24px 70px}
+ .cover h1{font-size:clamp(4rem,19vw,7rem)}
+ .cover-art{height:390px;min-height:0;margin-top:5px}
+ .photo-frame{width:70%;height:88%}
+ .cover-index{display:none}
+ .page{padding:42px 22px 110px}
+ .page-heading{margin-bottom:30px}
+ .message-layout,.gallery-grid,.surprise-layout{grid-template-columns:1fr;gap:35px}
+ .side-note{margin:0 0 5px 15px;font-size:19px}
+ .letter .dropcap{font-size:72px}
+ .gallery-intro{align-items:start;flex-direction:column}
+ .gallery-main img{height:300px}
+ .gallery-side{flex-direction:row;align-items:center}
+ .gallery-side .mini-photo{max-width:48%}
+ .mini-photo img{height:135px}
+ .gift-graphic{height:280px}
+ .bottom-nav{padding:11px 16px}
+ .nav-label{display:none}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition:none!important}}
+
+/* Seven-photo scrapbook collage */
+.scrapbook{display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:48px;gap:18px;align-items:stretch}
+.scrap-item{position:relative;background:#1e293b;padding:9px 9px 39px;box-shadow:8px 10px 25px rgba(0,0,0,.4);transition:transform .35s,box-shadow .35s;min-width:0;border:1px solid rgba(255,255,255,.1)}
+.scrap-item:hover{transform:rotate(0deg) translateY(-6px) scale(1.025)!important;box-shadow:13px 18px 30px rgba(0,0,0,.6);z-index:3}
+.scrap-item img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.85) contrast(1.05)}
+.scrap-item figcaption{position:absolute;bottom:10px;left:12px;right:8px;font:italic 16px "Playfair Display",serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#e2e8f0}
+.scrap-item .photo-number{position:absolute;top:15px;right:15px;background:var(--paper);color:var(--ink);font:9px "DM Mono",monospace;padding:5px 7px;z-index:1;border:1px solid rgba(255,255,255,.2)}
+.scrap-item:has(img[src=""]){background:repeating-linear-gradient(135deg,#1e293b,#1e293b 10px,#0f172a 10px,#0f172a 20px)}
+.scrap-item:nth-child(1){grid-column:1/6;grid-row:1/7;transform:rotate(-3deg)}
+.scrap-item:nth-child(2){grid-column:7/10;grid-row:1/5;transform:rotate(3deg);margin-top:18px}
+.scrap-item:nth-child(3){grid-column:10/13;grid-row:2/7;transform:rotate(-2deg)}
+.scrap-item:nth-child(4){grid-column:2/5;grid-row:8/13;transform:rotate(2deg)}
+.scrap-item:nth-child(5){grid-column:5/9;grid-row:7/13;transform:rotate(-1deg)}
+.scrap-item:nth-child(6){grid-column:9/12;grid-row:8/13;transform:rotate(3deg);margin-top:12px}
+.scrap-item:nth-child(7){grid-column:4/10;grid-row:14/20;transform:rotate(-1.5deg);margin:0 18px}
+.scrap-note{grid-column:1/4;grid-row:14/18;align-self:center;font:italic clamp(1.4rem,3vw,2.2rem)/1.15 "Playfair Display",serif;color:var(--red);transform:rotate(-5deg);padding:12px}
+.scrap-note small{display:block;font:9px "DM Mono",monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:15px}
+@media(max-width:760px){
+ .scrapbook{grid-template-columns:repeat(6,1fr);grid-auto-rows:38px;gap:12px}
+ .scrap-item{padding:6px 6px 31px}
+ .scrap-item figcaption{font-size:12px;bottom:8px;left:8px}
+ .scrap-item:nth-child(1){grid-column:1/4;grid-row:1/7}
+ .scrap-item:nth-child(2){grid-column:4/7;grid-row:2/7}
+ .scrap-item:nth-child(3){grid-column:1/4;grid-row:8/14}
+ .scrap-item:nth-child(4){grid-column:4/7;grid-row:9/14}
+ .scrap-item:nth-child(5){grid-column:1/4;grid-row:15/21}
+ .scrap-item:nth-child(6){grid-column:4/7;grid-row:16/22}
+ .scrap-note{grid-column:1/7;grid-row:23/26;text-align:center}
+ .scrap-item:nth-child(7){grid-column:4/8;grid-row:27/34;margin:0 8px}
+}
+
+
+/* Star field malam & gradien dinamis */
+.star-field{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.star{position:absolute;color:#fff;opacity:.7;animation:twinkle 3s ease-in-out infinite;text-shadow:0 0 8px rgba(255,255,255,0.8)}
+.star:nth-child(2n){color:var(--blue);animation-delay:1s;animation-duration:4s}
+.star:nth-child(3n){color:var(--orange);animation-delay:2s;animation-duration:2.5s}
+.star:nth-child(4n){color:var(--red);animation-delay:1.5s;animation-duration:3.5s}
+@keyframes twinkle{0%,100%{opacity:.2;transform:scale(.7) rotate(0)}50%{opacity:1;transform:scale(1.3) rotate(25deg)}}
+.cover-copy,.cover-art{z-index:1}
+.cover .star-field{z-index:0}
+.star-tagline{font:italic 19px "Playfair Display",serif;color:var(--blue);margin-top:18px}
+.video-cta-wrap{margin-top:32px;padding-top:24px;border-top:1px solid var(--line)}
+.video-cta{display:inline-flex;align-items:center;gap:22px;background:var(--red);color:white;border:0;padding:16px 21px;font:11px "DM Mono",monospace;letter-spacing:.13em;text-transform:uppercase;transition:.25s;box-shadow:6px 6px 0 var(--orange)}
+.video-cta:hover{transform:translate(-3px,-3px);box-shadow:9px 9px 0 var(--orange);background:var(--blue);color:#0b1329}
+.video-cta .arrow{font-size:20px;line-height:10px}
+.video-hint{display:block;font:10px "DM Mono",monospace;color:var(--muted);margin-top:13px;letter-spacing:.04em}
+.video-modal{position:fixed;inset:0;background:rgba(5,8,18,.92);z-index:100;display:none;align-items:center;justify-content:center;padding:22px;backdrop-filter:blur(8px)}
+.video-dialog{width:min(900px,100%);position:relative;background:#1e293b;padding:14px;box-shadow:0 25px 80px rgba(0,0,0,.8);border:1px solid rgba(255,255,255,.15)}
+.video-dialog video{display:block;width:100%;max-height:75vh;background:#000}
+.video-dialog .video-title{font:italic 22px "Playfair Display",serif;padding:12px 5px 2px;color:#f8fafc}
+.video-close{position:absolute;right:-12px;top:-15px;width:38px;height:38px;border:0;border-radius:50%;background:var(--orange);color:#0b1329;font-weight:bold;font-size:22px;z-index:2;box-shadow:0 4px 12px rgba(0,0,0,.3)}
+@media(max-width:760px){
+ .video-dialog{padding:9px}
+ .video-close{right:-7px;top:-12px}
+ .video-cta{padding:14px 17px}
+}
+
+/* Penambahan Gradien Latar Belakang Malam yang Indah */
+.site-shell {
+  background: radial-gradient(circle at 20% 20%, #1e1b4b 0%, #0b1329 50%, #030712 100%);
+}
+.page {
+  background: radial-gradient(circle at 80% 80%, #0f172a 0%, #0b1329 60%, #030712 100%);
+}
+.cover {
+  background: radial-gradient(circle at 50% 30%, #172554 0%, #0b1329 60%, #030712 100%);
+}
+</style>
+</head>
+<body>
+<div class="site-shell">
+  <div class="topbar">
+    <span class="issue">The Elin Edition <span style="color:var(--red)">/ No. 01</span></span>
+    <div class="top-right"><span>Birthday Special</span><span>Made with ♡</span></div>
+  </div>
+
+  <section class="cover" id="cover">
+    <div class="star-field" aria-hidden="true">
+      <span class="star" style="left:5%;top:16%;font-size:24px">✦</span>
+      <span class="star" style="left:43%;top:9%;font-size:15px">✧</span>
+      <span class="star" style="left:54%;top:76%;font-size:20px">✦</span>
+      <span class="star" style="left:91%;top:24%;font-size:28px">✧</span>
+      <span class="star" style="left:77%;top:88%;font-size:14px">✦</span>
+      <span class="star" style="left:28%;top:83%;font-size:18px">✧</span>
+      <span class="star" style="left:67%;top:17%;font-size:13px">✦</span>
+      <span class="star" style="left:15%;top:45%;font-size:16px">✧</span>
+      <span class="star" style="left:82%;top:55%;font-size:22px">✦</span>
+      <span class="star" style="left:35%;top:35%;font-size:12px">✧</span>
+      <span class="star" style="left:60%;top:40%;font-size:19px">✦</span>
+    </div>
+    <div class="cover-copy">
+      <div class="eyebrow">A little celebration of you · 02 November YOUR 18TH</div>
+      <h1>HII, <em>Elin <3</em><br>This one's<br>for you.</h1>
+      <p class="cover-sub">Thankyou for existing in this world. Hope your special day is as incredible as you are</p>
+      <div class="star-tagline">For the girl who brightens up every room. ✦</div>
+      <div class="cover-meta">
+        <button class="enter-btn" onclick="enterEdition()">Open your edition <span>↗</span></button>
+        <small>ONE SPECIAL PERSON.<br>COUNTLESS GOOD MEMORIES.</small>
+      </div>
+    </div>
+    <div class="cover-art">
+      <div class="photo-frame">
+        <img src="Pasted image.png" alt="Kenangan bersama Elin" onerror="this.style.opacity='.15'">
+        <div class="photo-label">The good days, captured.</div>
+      </div>
+      <div class="sticker">A whole<br>year more<br>of magic ✳</div>
+    </div>
+    <div class="cover-index">SCROLL LESS · FEEL MORE · 2026</div>
+  </section>
+
+  <div class="marquee"><span>HAPPY BIRTHDAY ELIN ✳ YOU ARE ONE OF A KIND ✳ KEEP SHINING ✳ HAPPY BIRTHDAY ELIN ✳ YOU ARE ONE OF A KIND ✳ KEEP SHINING ✳&nbsp;</span></div>
+
+  <main>
+    <section class="page" id="page-message">
+      <div class="star-field" aria-hidden="true">
+        <span class="star" style="left:12%;top:20%;font-size:18px">✧</span>
+        <span class="star" style="left:88%;top:15%;font-size:22px">✦</span>
+        <span class="star" style="left:45%;top:85%;font-size:15px">✧</span>
+        <span class="star" style="left:70%;top:70%;font-size:20px">✦</span>
+      </div>
+      <div class="page-heading"><div><div class="section-kicker">01 / A note for you</div><h2>Dear Elin,</h2></div><div class="page-number">THE LETTER — 01</div></div>
+      <div class="message-layout">
+        <div class="side-note">Some people make ordinary days feel a little more special.</div>
+        <div class="letter">
+          <p><span class="dropcap">H</span>ai Elin! Selamat ulang tahun ya! Terima kasih sudah lahir di dunia dan berperan positif di kehidupan orang lain.</p>
+          <p>Semoga tumbuh menjadi wanita yang takut akan Tuhan, yang hatinya selalu dipenuhi kedamaian, dan langkah kakinya selalu dituntun oleh kasih-Nya.</p>
+          <p>DAN JUGA semoga di usia yang baru ini, semua impianmu satu per satu tercapai. Makin glowing, dikelilingi circle yang baik, dan selalu dikasih alasan buat bersyukur sambil tersenyum. SEMOGA MASUK ITB ATAU UNAIR !!!</p>
+          <div class="signoff">With lots of love, ♡</div>
+        </div>
+      </div>
+      <div class="pullquote">“May this next chapter be full of <span>beautiful surprises.</span>”</div>
+      <div class="footer-mark">END OF LETTER · BEGINNING OF ANOTHER GREAT YEAR</div>
+    </section>
+
+    <section class="page" id="page-gallery">
+      <div class="star-field" aria-hidden="true">
+        <span class="star" style="left:8%;top:25%;font-size:20px">✦</span>
+        <span class="star" style="left:92%;top:80%;font-size:16px">✧</span>
+        <span class="star" style="left:50%;top:10%;font-size:25px">✦</span>
+        <span class="star" style="left:30%;top:90%;font-size:14px">✧</span>
+      </div>
+      <div class="page-heading"><div><div class="section-kicker">02 / The memory lane</div><h2>Little moments,<br><em>big memories.</em></h2></div><div class="page-number">THE PHOTO FILES — 02</div></div>
+      <div class="gallery-intro">
+        <div aria-hidden="true" style="font:24px 'Playfair Display',serif;color:var(--orange);letter-spacing:.5em">✦ ✧ ✦</div>
+        <div class="section-kicker">Seven frames worth keeping</div>
+        <p>Different days, different stories, and one person who makes the memories worth keeping.</p>
+      </div>
+
+      <div class="scrapbook">
+        <figure class="scrap-item">
+          <span class="photo-number">01</span>
+          <img src="foto1.png" alt="Foto kenangan 1">
+          <figcaption>The main character ✦</figcaption>
+        </figure>
+        <figure class="scrap-item">
+          <span class="photo-number">02</span>
+          <img src="foto2.png" alt="Foto kenangan 2">
+          <figcaption>Winning moments</figcaption>
+        </figure>
+        <figure class="scrap-item">
+          <span class="photo-number">03</span>
+          <img src="foto3.png" alt="Foto kenangan 3">
+          <figcaption> "miss fealy rythm:("</figcaption>
+        </figure>
+        <figure class="scrap-item">
+          <span class="photo-number">04</span>
+          <img src="foto4.png" alt="Foto kenangan 4">
+          <figcaption>SYN5 JAYA</figcaption>
+        </figure>
+        <figure class="scrap-item">
+          <span class="photo-number">05</span>
+          <img src="foto5.png" alt="Foto kenangan 5">
+          <figcaption>One for the album</figcaption>
+        </figure>
+        <figure class="scrap-item">
+          <span class="photo-number">06</span>
+          <img src="foto6.png" alt="Foto kenangan 6">
+          <figcaption>My church's birthday</figcaption>
+        </figure>
+        <div class="scrap-note">A little chaos,<br>a lot of laughter.<small>Collected moments · VERSI FOTO YG KETEMU AJA</small></div>
+        <figure class="scrap-item">
+          <span class="photo-number">07</span>
+          <img src="file:///home/alicia/Downloads/elin%20birthday/foto7.png" alt="Foto kenangan 7">
+          <figcaption>To many more chapters ♡</figcaption>
+        </figure>
+      </div>
+      <div class="footer-mark">SOME DAYS BECOME STORIES WE KEEP</div>
+    </section>
+
+    <section class="page" id="page-surprise">
+      <div class="star-field" aria-hidden="true">
+        <span class="star" style="left:15%;top:15%;font-size:22px">✧</span>
+        <span class="star" style="left:85%;top:85%;font-size:18px">✦</span>
+        <span class="star" style="left:55%;top:20%;font-size:15px">✧</span>
+        <span class="star" style="left:25%;top:75%;font-size:24px">✦</span>
+      </div>
+      <div class="page-heading"><div><div class="section-kicker">03 / One last thing</div><h2>A little<br>something.</h2></div><div class="page-number">THE GOOD STUFF — 03</div></div>
+      <div class="surprise-layout">
+        <div class="gift-graphic" id="gift-graphic"><div class="gift-star">✳</div><div class="gift-caption">A small reminder for a special human</div></div>
+        <div class="surprise-copy">
+          <div class="section-kicker">The appreciation box</div>
+          <h3>In case you<br>forgot how great<br>you are.</h3>
+          <p>Tap the button. A little reminder about the things that make you, you.</p>
+          <div class="praise-box" id="surprise-text">“Elin: manusia yang selalu kasih 100%, comfort zone buat deeptalk, dan up for every chanche given to her”</div>
+          <button class="reveal-btn" onclick="randomPraise()">Reveal another note ↗</button>
+          <div class="video-cta-wrap">
+            <div class="section-kicker">A little surprise is waiting</div>
+            <button class="video-cta" onclick="openVideo()">
+              <span>Click here</span><span class="arrow">↗ ✦</span>
+            </button>
+            <span class="video-hint">P.S. I made something for you. Don't skip this one.</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-mark">HAPPY BIRTHDAY, ELIN · THE WORLD IS BETTER WITH YOU IN IT</div>
+    </section>
+  </main>
+</div>
+
+<nav class="bottom-nav" id="bottom-nav" hidden>
+  <div class="nav-label" id="nav-label">01 — A note for you</div>
+  <div class="progress"><i class="on"></i><i></i><i></i></div>
+  <div class="nav-actions">
+    <button class="nav-btn" id="prev-btn" onclick="movePage(-1)" disabled>← Back</button>
+    <button class="nav-btn primary" id="next-btn" onclick="movePage(1)">Next →</button>
+  </div>
+</nav>
+
+
+<div class="video-modal" id="video-modal" role="dialog" aria-modal="true" aria-label="Birthday video">
+  <div class="video-dialog">
+    <button class="video-close" onclick="closeVideo()" aria-label="Close video">×</button>
+    <video id="birthday-video" controls playsinline preload="metadata">
+      <source src="videoelin.mp4" type="video/mp4">
+      Browser kamu belum mendukung pemutaran video.
+    </video>
+    <div class="video-title">A little something, just for you. ✦</div>
+  </div>
+</div>
+
+<script>
+const pages = ["page-message","page-gallery","page-surprise"];
+const labels = ["01 — A note for you","02 — The memory lane","03 — A little something"];
+let current = -1, photoIndex = 0;
+
+function enterEdition(){
+  document.getElementById("cover").style.display="none";
+  document.querySelector(".marquee").style.display="none";
+  document.getElementById("bottom-nav").hidden=false;
+  current=0; showPage();
+}
+function showPage(){
+  pages.forEach((id,i)=>document.getElementById(id).classList.toggle("active",i===current));
+  document.getElementById("nav-label").textContent=labels[current];
+  document.getElementById("prev-btn").disabled=current===0;
+  document.getElementById("next-btn").textContent=current===2?"Finish ✦":"Next →";
+  document.querySelectorAll(".progress i").forEach((el,i)=>el.classList.toggle("on",i<=current));
+}
+function movePage(direction){
+  if(current===2 && direction===1){
+    document.getElementById("page-surprise").classList.remove("active");
+    document.getElementById("bottom-nav").hidden=true;
+    document.getElementById("cover").style.display="grid";
+    document.querySelector(".marquee").style.display="block";
+    document.getElementById("cover").scrollIntoView({behavior:"smooth"});
+    current=-1; return;
+  }
+  current=Math.max(0,Math.min(2,current+direction)); showPage();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+/* Galeri menggunakan tujuh foto statis dalam layout scrapbook. */
+const praises=[
+  "Elin itu orangnya asyik diajak kerja sama dan selalu totalitas!",
+  "Senyummu punya cara sendiri untuk bikin suasana jadi lebih ceria.",
+  "You are smart, talented, kind, and stronger than you think.",
+  "Semoga keberanianmu mencoba hal baru selalu lebih besar dari rasa takutmu.",
+  "Jangan lupa bangga sama dirimu sendiri. Kamu sudah sejauh ini!",
+  "maaf ya AI, ga pande berkata kata aowkaowk"
+];
+let lastPraise=-1;
+function randomPraise(){
+  let next;
+  do{next=Math.floor(Math.random()*praises.length)}while(next===lastPraise);
+  lastPraise=next;
+  const el=document.getElementById("surprise-text");
+  el.style.opacity=0;
+  document.getElementById("gift-graphic").classList.toggle("open");
+  setTimeout(()=>{el.textContent="“"+praises[next]+"”";el.style.opacity=1},220);
+}
+
+function openVideo(){
+  const modal=document.getElementById("video-modal");
+  const video=document.getElementById("birthday-video");
+  modal.classList.add("open");
+  video.currentTime=0;
+  video.play().catch(()=>{});
+}
+function closeVideo(){
+  const modal=document.getElementById("video-modal");
+  const video=document.getElementById("birthday-video");
+  video.pause();
+  modal.classList.remove("open");
+}
+document.getElementById("video-modal").addEventListener("click",function(e){
+  if(e.target===this) closeVideo();
+});
+document.addEventListener("keydown",function(e){
+  if(e.key==="Escape") closeVideo();
+});
+
+</script>
+<!-- Elemen Audio Musik Latar -->
+<audio id="bg-music" loop preload="auto">
+  <source src="lagu.mp3" type="audio/mp3">
+</audio>
+
+<!-- Tombol Kontrol Musik Mengambang di Pojok -->
+<div id="music-control" onclick="toggleMusic()" style="position: fixed; bottom: 20px; right: 20px; z-index: 999; background: var(--red); color: white; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.3); font-size: 18px; transition: transform 0.2s;" title="Putar/Matikan Musik">
+  🎵
+</div>
+
+<script>
+// Agar musik otomatis mulai saat tombol "Open your edition" ditekan pertama kali
+const originalEnterEdition = window.enterEdition;
+window.enterEdition = function() {
+    originalEnterEdition();
+    const music = document.getElementById('bg-music');
+    music.play().catch(e => console.log("Audio autoplay dicegah browser:", e));
+};
+
+// Fungsi untuk mematikan/menyalakan musik lewat tombol melayang
+let isPlaying = false;
+function toggleMusic() {
+    const music = document.getElementById('bg-music');
+    const controlBtn = document.getElementById('music-control');
+    if (isPlaying) {
+        music.pause();
+        controlBtn.style.opacity = "0.5";
+        controlBtn.textContent = "🔇";
+        isPlaying = false;
+    } else {
+        music.play();
+        controlBtn.style.opacity = "1";
+        controlBtn.textContent = "🎵";
+        isPlaying = true;
+    }
+}
+</script>
+</body>
+</html>
