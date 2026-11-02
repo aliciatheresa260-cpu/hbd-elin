@@ -53,8 +53,8 @@ button{font:inherit;cursor:pointer}
 .side-note:before{content:"✳";display:block;font:30px "DM Sans";margin-bottom:20px}
 .letter{max-width:700px}
 .letter .dropcap{font:600 92px/.8 "Playfair Display",serif;color:var(--red);float:left;margin:9px 14px 0 0}
-.letter p{font:500 clamp(1.05rem,2vw,1.35rem)/1.8 "Playfair Display",serif;margin:0 0 24px;color:#e2e8f0}
-.letter .signoff{font:italic 25px "Playfair Display",serif;color:var(--red);margin-top:35px}
+.letter p{font:500 clamp(1.05rem,2vw,1.35rem)/1.8 "Gotham Book","Helvetica Neue",Arial,sans-serif;margin:0 0 24px;color:#e2e8f0}
+.letter .signoff{font:italic 25px "Gotham Book","Helvetica Neue",Arial,sans-serif;color:var(--red);margin-top:35px}
 .pullquote{margin:55px 0 0;padding:25px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font:italic clamp(1.8rem,4vw,3.3rem)/1.15 "Playfair Display",serif;max-width:820px;color:#f8fafc}
 .pullquote span{color:var(--blue)}
 .gallery-intro{display:flex;justify-content:space-between;gap:20px;align-items:end;margin-bottom:28px}
@@ -165,6 +165,7 @@ button{font:inherit;cursor:pointer}
 .video-cta .arrow{font-size:20px;line-height:10px}
 .video-hint{display:block;font:10px "DM Mono",monospace;color:var(--muted);margin-top:13px;letter-spacing:.04em}
 .video-modal{position:fixed;inset:0;background:rgba(5,8,18,.92);z-index:100;display:none;align-items:center;justify-content:center;padding:22px;backdrop-filter:blur(8px)}
+.video-modal.open{display:flex}
 .video-dialog{width:min(900px,100%);position:relative;background:#1e293b;padding:14px;box-shadow:0 25px 80px rgba(0,0,0,.8);border:1px solid rgba(255,255,255,.15)}
 .video-dialog video{display:block;width:100%;max-height:75vh;background:#000}
 .video-dialog .video-title{font:italic 22px "Playfair Display",serif;padding:12px 5px 2px;color:#f8fafc}
@@ -412,6 +413,7 @@ function openVideo(){
   const modal=document.getElementById("video-modal");
   const video=document.getElementById("birthday-video");
   modal.classList.add("open");
+  modal.style.display = "flex";
   video.currentTime=0;
   video.play().catch(()=>{});
 }
@@ -420,6 +422,7 @@ function closeVideo(){
   const video=document.getElementById("birthday-video");
   video.pause();
   modal.classList.remove("open");
+  modal.style.display = "none";
 }
 document.getElementById("video-modal").addEventListener("click",function(e){
   if(e.target===this) closeVideo();
